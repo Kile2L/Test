@@ -50,7 +50,7 @@ public class PlayerScript : MonoBehaviour
         WinLose();
     }
 
-    void addPoint(int points)
+    void addPoints(int points)
     {
         playerPoints += points;
         audioSource.PlayOneShot(pointSound);
