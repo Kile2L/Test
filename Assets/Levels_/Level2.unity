@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerVelocity: 0.05
-  boundary: 5.62
+  boundary: 6.84
   pointSound: {fileID: 8300000, guid: 115ea3a8d222d2a409d09d047b351c94, type: 3}
   lifeSound: {fileID: 8300000, guid: cd6204885c414034aa7cf4beeaa31643, type: 3}
 --- !u!61 &159844220

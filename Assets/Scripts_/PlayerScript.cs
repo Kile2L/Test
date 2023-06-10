@@ -28,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     {
         // horizontal movement
         playerPosition.x += Input.GetAxis("Horizontal") * playerVelocity;
+        playerPosition.x = Mathf.Clamp(playerPosition.x, -boundary, boundary);
 
         // leave the game
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -39,14 +40,15 @@ public class PlayerScript : MonoBehaviour
         transform.position = playerPosition;
 
         // boundaries
-        if (playerPosition.x < -boundary)
-        {
-            transform.position = new Vector3(-boundary, playerPosition.y, playerPosition.z);
-        }
-        if (playerPosition.x > boundary)
-        {
-            transform.position = new Vector3(boundary, playerPosition.y, playerPosition.z);
-        }
+        // if (playerPosition.x < -boundary)
+        // {
+        //     transform.position = new Vector3(-boundary, playerPosition.y, playerPosition.z);
+        // }
+        // if (playerPosition.x > boundary)
+        // {
+        //     transform.position = new Vector3(boundary, playerPosition.y, playerPosition.z);
+        // }
+
         WinLose();
     }
 
@@ -55,25 +57,37 @@ public class PlayerScript : MonoBehaviour
         playerPoints += points;
         audioSource.PlayOneShot(pointSound);
     }
-    void TakeLife(){
+
+    void TakeLife()
+    {
         playerLives--;
         audioSource.PlayOneShot(lifeSound);
     }
-    void WinLose(){
+
+    void WinLose()
+    {
         // перезапускаем уровень
-        if (playerLives == 0) {
+        if (playerLives == 0)
+        {
             Application.LoadLevel("Level1");
         }
 
         // все блоки уничтожены
-        if ((GameObject.FindGameObjectsWithTag ("Block")).Length == 0) {
+        if (GameObject.FindGameObjectsWithTag ("Block").Length == 0)
+        {
             // проверяем текущий уровень
-            if (Application.loadedLevelName == "Level1") {
+            if (Application.loadedLevelName == "Level1")
+            {
                 Application.LoadLevel("Level2");
-            } else {
+            }
+            else
+            {
                 Application.Quit();
             }
         }
     }
-    
+    void OnGUI()
+    {
+        GUI.Label (new Rect(5.0f,3.0f,200.0f,200.0f),"Live's: " + playerLives + "  Score: " + playerPoints);
+    }
 }
